@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: book
+  name: book
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: book
+  template:
+    metadata:
+      labels:
+        app: book
+    spec:
+      containers:
+      - image: tej2003/online-bookstore
+        name: book
+        ports:
+        - containerPort: 5432
+          name: book
+        volumeMounts:
+        - mountPath: /var/lib/postgresql/data
+          name: book
+      volumes:
+      - name: book
+        emptyDir: {} 
